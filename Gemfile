@@ -18,6 +18,11 @@ gem 'devise_token_auth', '~> 0.1'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'rack-attack', '~> 5.0'
 gem 'active_model_serializers', '~> 0.10'
+gem 'state_machines-activerecord'
+gem "paperclip", "~> 5.0.0"
+gem 'acts-as-taggable-on', '~> 4.0'
+gem 'aws-sdk', '~> 2.3.0'
+gem 'configatron'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
@@ -41,6 +46,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'sextant'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
