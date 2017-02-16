@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 
 
+
   constraints subdomain: 'admin.api' do
+
 
     scope module: :admin_api do
 

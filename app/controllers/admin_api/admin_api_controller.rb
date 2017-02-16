@@ -10,6 +10,3 @@ module AdminApi
   end
 
 end
-
-
-
