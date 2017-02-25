@@ -8,12 +8,12 @@ module AdminApi
     def index
       @books = Book.all
 
-      render json: @books
+      render json: @books, render_params: params
     end
 
 
     def show
-      render json: @book
+      render json: @book, render_params: params
     end
 
 
@@ -31,7 +31,7 @@ module AdminApi
 
     def update
       if @book.update(book_params)
-        render json: @book
+        render json: @book, tags: true
       else
         render json: @book.errors, status: :unprocessable_entity
       end
