@@ -12,15 +12,16 @@ class AdminApi::ChaptersController < AdminApi::AdminApiController
 
 
   def show
-    render json: @chapter
+    render json: @chapter, render_params: params
   end
 
 
   def create
+
     @chapter = @book.chapters.new(chapter_params)
 
     if @chapter.save
-      render json: @chapter, status: :created, location: @chapter
+      render json: @chapter, status: :created,  render_params: params
     else
       render json: @chapter.errors, status: :unprocessable_entity
     end
@@ -30,7 +31,7 @@ class AdminApi::ChaptersController < AdminApi::AdminApiController
 
   def update
     if @chapter.update(chapter_params)
-      render json: @chapter
+      render json: @chapter,  render_params: params
     else
       render json: @chapter.errors, status: :unprocessable_entity
     end
@@ -44,10 +45,12 @@ class AdminApi::ChaptersController < AdminApi::AdminApiController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_book
-    @book = Book.find(params[:book_id])
+    p params
+    @book = Book.find_by_id(params[:book_id])
   end
+
   def set_chapter
-    @chapter = @book.chapters.find(params[:id])
+    @chapter = @book.chapters.find_by_id(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

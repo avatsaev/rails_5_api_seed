@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-
   constraints subdomain: 'admin.api' do
 
 
@@ -14,6 +11,12 @@ Rails.application.routes.draw do
 
       resources :books do
         resources :chapters
+      end
+
+      resources :tags, only: [:most_used] do
+        collection do
+          get :most_used
+        end
       end
 
     end
@@ -28,14 +31,11 @@ Rails.application.routes.draw do
 
         mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
 
-
         resources :books, only: [:index, :show] do
           resources :chapters, only: [:index, :show]
         end
 
       end
-
-
 
     end
 
