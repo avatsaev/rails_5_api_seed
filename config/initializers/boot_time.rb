@@ -1,0 +1,1 @@
+UmmahbooksPlatform::BOOTED_AT = Time.now

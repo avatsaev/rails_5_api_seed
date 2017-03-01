@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+
+  root to: "application#health_check"
+
   constraints subdomain: 'admin.api' do
 
 
