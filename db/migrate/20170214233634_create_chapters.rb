@@ -4,7 +4,7 @@ class CreateChapters < ActiveRecord::Migration[5.0]
       t.string :title
       t.string :author
       t.string :contents
-      t.string :sluggit
+      t.string :slug
       t.boolean :is_paid
       t.references :book, foreign_key: true
 
