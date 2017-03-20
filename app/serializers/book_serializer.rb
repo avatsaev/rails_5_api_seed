@@ -1,8 +1,9 @@
 class BookSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :author
+  attributes  :title, :description, :author
+  attribute :slug, key: :id
 
   has_many :chapters, if: :chapters?
-  has_many :tags, key: :tag_list, if: :tags?
+  has_many :book_tag_list, if: :tags?
 
 
   def chapters?

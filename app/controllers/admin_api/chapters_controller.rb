@@ -45,17 +45,22 @@ class AdminApi::ChaptersController < AdminApi::AdminApiController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_book
-    p params
-    @book = Book.find_by_id(params[:book_id])
+    @book = Book.friendly.find(params[:book_id])
   end
 
   def set_chapter
-    @chapter = @book.chapters.find_by_id(params[:id])
+    @chapter = @book.chapters.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def chapter_params
-    params.require(:chapter).permit!
+    params.require(:chapter).permit(
+                                :title,
+                                :book_id,
+                                :contents,
+                                :is_paid,
+                                { chapter_tag_list: []}
+    )
   end
   
   

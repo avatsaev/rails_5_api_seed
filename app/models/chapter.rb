@@ -1,9 +1,9 @@
 class Chapter < ApplicationRecord
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
+
   belongs_to :book
-  acts_as_taggable
-  has_attached_file :text_file
-  validates_attachment :text_file,
-                       content_type: { content_type: "text/html" }
+  acts_as_taggable_on :chapter_tags
 
 end

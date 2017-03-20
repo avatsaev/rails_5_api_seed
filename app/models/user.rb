@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :omniauthable
 
   include DeviseTokenAuth::Concerns::User
+
+  has_many :books, through: :user_library_books
+
 end

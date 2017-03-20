@@ -19,7 +19,8 @@ Rails.application.routes.draw do
 
       resources :tags, only: [:most_used] do
         collection do
-          get :most_used
+          get :most_used_for_books
+          get :most_used_for_chapters
         end
       end
 

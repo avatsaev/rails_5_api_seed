@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225105452) do
+ActiveRecord::Schema.define(version: 20170320151713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170225105452) do
     t.text     "description"
     t.boolean  "is_paid"
     t.string   "author"
+    t.string   "slug"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "cover_file_name"
@@ -60,19 +61,29 @@ ActiveRecord::Schema.define(version: 20170225105452) do
   create_table "chapters", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
+    t.string   "contents"
+    t.string   "slug"
     t.boolean  "is_paid"
+    t.integer  "book_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "book_id"
-    t.string   "text_file_file_name"
-    t.string   "text_file_content_type"
-    t.integer  "text_file_file_size"
-    t.datetime "text_file_updated_at"
     t.string   "audio_file_file_name"
     t.string   "audio_file_content_type"
     t.integer  "audio_file_file_size"
     t.datetime "audio_file_updated_at"
-    t.text     "contents"
+    t.index ["book_id"], name: "index_chapters_on_book_id", using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -98,6 +109,22 @@ ActiveRecord::Schema.define(version: 20170225105452) do
     t.string  "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
+  create_table "user_libraries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_libraries_on_user_id", using: :btree
+  end
+
+  create_table "user_library_books", force: :cascade do |t|
+    t.integer  "user_library_id"
+    t.integer  "book_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["book_id"], name: "index_user_library_books_on_book_id", using: :btree
+    t.index ["user_library_id"], name: "index_user_library_books_on_user_library_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -129,4 +156,8 @@ ActiveRecord::Schema.define(version: 20170225105452) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "chapters", "books"
+  add_foreign_key "user_libraries", "users"
+  add_foreign_key "user_library_books", "books"
+  add_foreign_key "user_library_books", "user_libraries"
 end

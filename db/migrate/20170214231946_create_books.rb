@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration[5.0]
       t.text :description
       t.boolean :is_paid
       t.string :author
+      t.string :slug
 
       t.timestamps
     end

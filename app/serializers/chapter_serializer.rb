@@ -1,10 +1,11 @@
 class ChapterSerializer < ActiveModel::Serializer
-  attributes :id, :book_id, :title, :author, :is_paid, :contents
+  attributes  :book_id, :title, :is_paid, :contents
+  attribute :slug, key: :id
 
-  attribute :tags, key: :tag_list, if: :tags?
+  attribute :chapter_tag_list, if: :tags?
 
   belongs_to :book, if: :book?
-  has_many :tags, key: :tag_list, if: :tags?
+  has_many :chapter_tag_list,  if: :tags?
 
   def book?
     @instance_options[:render_params].present? && @instance_options[:render_params][:book]
