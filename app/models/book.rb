@@ -10,6 +10,9 @@ class Book < ApplicationRecord
 
   friendly_id :title, use: [:slugged, :finders]
 
+  validates :title, :description, :author, presence: true
+
+
   validates_uniqueness_of :title
 
 end
