@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323172019) do
+ActiveRecord::Schema.define(version: 20170325165059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,9 +121,11 @@ ActiveRecord::Schema.define(version: 20170323172019) do
   create_table "user_library_books", force: :cascade do |t|
     t.integer  "user_library_id"
     t.integer  "book_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "current_chapter_id"
     t.index ["book_id"], name: "index_user_library_books_on_book_id", using: :btree
+    t.index ["current_chapter_id"], name: "index_user_library_books_on_current_chapter_id", using: :btree
     t.index ["user_library_id"], name: "index_user_library_books_on_user_library_id", using: :btree
   end
 
@@ -159,5 +161,6 @@ ActiveRecord::Schema.define(version: 20170323172019) do
   add_foreign_key "chapters", "books"
   add_foreign_key "user_libraries", "users"
   add_foreign_key "user_library_books", "books"
+  add_foreign_key "user_library_books", "chapters", column: "current_chapter_id"
   add_foreign_key "user_library_books", "user_libraries"
 end

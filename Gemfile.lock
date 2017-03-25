@@ -58,6 +58,9 @@ GEM
       activerecord (>= 4.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    apipie-rails (0.4.0)
+      json
+      rails (>= 4.0)
     arel (7.1.4)
     aws-sdk (2.3.22)
       aws-sdk-resources (= 2.3.22)
@@ -278,6 +281,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10)
   acts-as-taggable-on (~> 4.0)
+  apipie-rails
   aws-sdk (~> 2.3.0)
   byebug
   configatron

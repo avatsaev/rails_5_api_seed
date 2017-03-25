@@ -61,6 +61,7 @@ group :development do
   gem 'sextant'
   gem 'railroady'
   gem 'spring'
+  gem 'apipie-rails'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
   gem 'rack-mini-profiler', '~> 0.10'

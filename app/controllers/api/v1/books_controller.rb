@@ -12,9 +12,11 @@ module Api::V1
       render json: Book.first, render_params: params
     end
 
+
     def recent
       render json: Book.first(2), render_params: params
     end
+
 
     def popular
       render json: Book.first(3), render_params: params

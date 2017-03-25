@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
   root to: "application#health_check"
 
   constraints subdomain: 'admin.api' do
@@ -30,6 +29,8 @@ Rails.application.routes.draw do
 
   constraints subdomain: 'api' do
 
+    apipie
+
     scope module: :api do
 
       namespace :v1 do
@@ -47,6 +48,12 @@ Rails.application.routes.draw do
           end
         end
 
+        resource :library, only: [:show] do
+          member do
+            post '/add_book/:id', to: 'library#add_book'
+            delete '/remove_book/:id', to: 'library#remove_book'
+          end
+        end
       end
 
     end
