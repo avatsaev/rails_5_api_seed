@@ -5,7 +5,7 @@ class Api::V1::LibraryController < Api::V1::UserApiController
 
 
   def show
-    render json: current_user.library.books
+    render json: current_v1_user.library.books
   end
 
 
@@ -16,7 +16,7 @@ class Api::V1::LibraryController < Api::V1::UserApiController
     is_added =  @library.add_book @book
 
     render json: {
-        book_id: @book.id,
+        book_id: @book.slug,
         added: is_added
     }, status: :ok
 
@@ -27,7 +27,7 @@ class Api::V1::LibraryController < Api::V1::UserApiController
 
     is_removed = @library.remove_book @book
     render json: {
-        book_id: @book.id,
+        book_id: @book.slug,
         removed: is_removed
     }, status: :ok
 
@@ -37,7 +37,7 @@ class Api::V1::LibraryController < Api::V1::UserApiController
 
 
   def set_library
-    @library = current_user.library
+    @library = current_v1_user.library
   end
 
 

@@ -48,7 +48,7 @@ Rails.application.routes.draw do
           end
         end
 
-        resource :library, only: [:show] do
+        resource :library, only: [:show], controller: :library do
           member do
             post '/add_book/:id', to: 'library#add_book'
             delete '/remove_book/:id', to: 'library#remove_book'
