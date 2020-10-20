@@ -152,7 +152,7 @@ GEM
     pry-rails (0.3.5)
       pry (>= 0.9.10)
     public_suffix (2.0.5)
-    puma (3.7.0)
+    puma (3.12.6)
     rack (2.0.1)
     rack-attack (5.0.1)
       rack
@@ -294,7 +294,7 @@ DEPENDENCIES
   paperclip (~> 5.0.0)
   pg (~> 0.18)
   pry-rails
-  puma (~> 3.0)
+  puma (~> 3.12)
   rack-attack (~> 5.0)
   rack-cors
   rack-mini-profiler (~> 0.10)
